@@ -10,7 +10,13 @@ export class Cell extends Component {
   };
 
   render() {
-    const { data, width, height, flex, style, textStyle, borderStyle, ...props } = this.props;
+    let { data, width, height, flex, style, textStyle, borderStyle, ...props } = this.props;
+
+    const isHideOne = String(data).includes('Same as above')
+    if (data === 'Same as above') {
+      data = ''
+    }
+
     const textDom = React.isValidElement(data) ? (
       data
     ) : (
@@ -26,7 +32,7 @@ export class Cell extends Component {
       <View
         style={[
           {
-            borderTopWidth,
+            ...!isHideOne && { borderTopWidth },
             borderRightWidth,
             borderColor
           },
